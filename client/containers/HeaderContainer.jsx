@@ -13,10 +13,11 @@ const HeaderContainer = () => {
     <div className='headerContainer'>
       <h1 id='header'>Job Application Tracker</h1>
       {/* button click opens popup form to add job application */}
+      <PopupForm />
       {/* data from popup form goes into addNewNote() */}
-      <button className='addButton' id='addPost' onClick={() => addNewNote()}>
+      {/* <button className='addButton' id='addPost' onClick={() => addNewNote()}>
         Add New Note
-      </button>
+      </button> */}
     </div>
   );
 };

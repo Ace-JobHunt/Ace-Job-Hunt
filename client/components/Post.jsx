@@ -17,7 +17,7 @@ const Post = (props) => {
       </p>
       <p>
         <b>Job Title:</b>
-        {props.jobTitle}
+        {props.title}
       </p>
       <p>
         <b>Date Created:</b>
@@ -33,8 +33,7 @@ const Post = (props) => {
       </p>
       <p>
         <b>Job Link:</b>
-        <a href={props.jobLink}>Click on Link</a>
-
+        <a href={props.link}>Click on Link</a>
       </p>
     </div>
   );

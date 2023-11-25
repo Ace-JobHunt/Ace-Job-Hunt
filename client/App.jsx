@@ -7,7 +7,6 @@ const App = () => {
 
   return (
     <div>
-      <h1 id='header'>Job Application Tracker</h1>
       <MainContainer />
     </div>
   );

@@ -1,8 +1,10 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
+import Post from './Post.jsx';
 
 const DisplayNotes = ({ status }) => {
   const data = useSelector((state) => {
-    return state.notes.status;
+    return state.notes[status];
   });
   console.log('data', data);
   const postArray = [];
@@ -11,11 +13,11 @@ const DisplayNotes = ({ status }) => {
       <Post
         key={ele.id}
         company={ele.company}
-        jobTitle={ele.jobTitle}
+        title={ele.title}
         date={ele.date}
         salary={ele.salary}
         status={ele.status}
-        jobLink={ele.jobLink}
+        link={ele.link}
       />
     );
   });
