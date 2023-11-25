@@ -6,10 +6,8 @@ const HeaderContainer = () => {
     <div className='headerContainer'>
       <h1 id='header'>Job Application Tracker</h1>
       {/* button click opens popup form to add job application */}
-      <button id='addPost' onClick>
-        {' '}
-        +{' '}
-      </button>
+      <PopupForm />
+      <button id='addPost' onClick></button>
     </div>
   );
 };
