@@ -4,19 +4,12 @@ const jobController = {
   //create job app.
   async createJob(req, res, next) {
     try {
-      const { company, title, dateApplied, dateChanged, salary, status, link } =
-        req.body;
-      if (
-        company.length &&
-        title.length &&
-        dateApplied.length &&
-        status.length
-      ) {
+      console.log(req.body);
+      const { company, title, salary, status, link } = req.body;
+      if (company) {
         const newJob = await Job.create({
           company,
           title,
-          dateApplied,
-          dateChanged,
           salary,
           status,
           link,

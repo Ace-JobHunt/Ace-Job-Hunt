@@ -9,11 +9,36 @@ const PopupForm = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [company, setCompany] = useState(null);
-  const [jobTitle, setJobTitle] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [salary, setSalary] = useState(null);
-  const [link, setLink] = useState(null);
+  const [company, setCompany] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
+  const [status, setStatus] = useState('');
+  const [salary, setSalary] = useState('');
+  const [link, setLink] = useState('');
+
+  function handleClick() {
+    let formObj = {
+      company: company,
+      title: jobTitle,
+      salary: salary,
+      status: status,
+      link: link,
+    };
+
+    console.log(formObj);
+
+    fetch('/', {
+      method: 'POST',
+      body: JSON.stringify(formObj),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <>
@@ -57,7 +82,7 @@ const PopupForm = () => {
                 id='company'
                 placeholder='Codesmith'
                 type='string'
-                value={props.company}
+                value={company}
                 onChange={(e) => {
                   setCompany(e.target.value);
                 }}
@@ -70,7 +95,7 @@ const PopupForm = () => {
                 id='jobTitle'
                 placeholder='Software Engineer'
                 type='string'
-                value={props.jobTitle}
+                value={jobTitle}
                 onChange={(e) => {
                   setJobTitle(e.target.value);
                 }}
@@ -81,6 +106,7 @@ const PopupForm = () => {
               Status:
               <select
                 id='status'
+                value={status}
                 onChange={(e) => {
                   setStatus(e.target.value);
                 }}
@@ -107,7 +133,7 @@ const PopupForm = () => {
                 id='salary'
                 placeholder='100,000'
                 type='number'
-                value={props.salary}
+                value={salary}
                 onChange={(e) => {
                   setSalary(e.target.value);
                 }}
@@ -120,7 +146,7 @@ const PopupForm = () => {
                 id='link'
                 placeholder='www.codesmith.io'
                 type='string'
-                value={props.link}
+                value={link}
                 onChange={(e) => {
                   setLink(e.target.value);
                 }}
@@ -134,7 +160,9 @@ const PopupForm = () => {
             Don't Save
           </Button>
           {/* when they click track button - send to database  */}
-          <Button variant='primary'>Let's Track It!</Button>
+          <Button variant='primary' onClick={handleClick}>
+            Let's Track It!
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

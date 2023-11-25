@@ -14,12 +14,10 @@ mongoose
 const Schema = mongoose.Schema;
 
 const jobSchema = new Schema({
-  company: { type: String, required: true },
-  title: { type: String, required: true },
-  dateApplied: { type: Date, required: true },
-  dateChanged: Date,
-  salary: Number,
-  status: { type: String, required: true },
+  company: String,
+  title: String,
+  salary: String,
+  status: String,
   link: String,
 });
 

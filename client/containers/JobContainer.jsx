@@ -12,7 +12,7 @@ const JobContainer = () => {
   ];
   let columnArray = [];
   statusArray.forEach((ele) => {
-    columnArray.push(<DisplayNotes status={ele} />);
+    columnArray.push(<DisplayNotes key={ele} status={ele} />);
   });
   return <div className='column'>{columnArray}</div>;
 };
