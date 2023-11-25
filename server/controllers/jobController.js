@@ -1,4 +1,4 @@
-const Job = require('../models/jobModel');
+const { Job } = require('../models/jobModel');
 
 const jobController = {
   //create job app.
@@ -83,12 +83,12 @@ const jobController = {
 
   async syncData(req, res, next) {
     try {
-      const allInterested = await Job.find({ status: interested });
-      const allApplied = await Job.find({ status: applied });
-      const allnterviewed = await Job.find({ status: interviewed });
-      const allFollowedup = await Job.find({ status: followedup });
-      const allAccepted = await Job.find({ status: accepted });
-      const allRejected = await Job.find({ status: rejected });
+      const allInterested = await Job.find({ status: 'interested' });
+      const allApplied = await Job.find({ status: 'applied' });
+      const allnterviewed = await Job.find({ status: 'interviewed' });
+      const allFollowedup = await Job.find({ status: 'followedup' });
+      const allAccepted = await Job.find({ status: 'accepted' });
+      const allRejected = await Job.find({ status: 'rejected' });
 
       let syncObject = {
         interested: allInterested,

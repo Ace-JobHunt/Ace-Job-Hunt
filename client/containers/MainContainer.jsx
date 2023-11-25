@@ -6,7 +6,7 @@ const MainContainer = () => {
   return (
     <div className='container'>
       <HeaderContainer className='headerContainer' />
-      <JobContainer currentState={currentState} />
+      <JobContainer />
     </div>
   );
 };

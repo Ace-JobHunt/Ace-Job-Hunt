@@ -10,11 +10,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.resolve(__dirname, '../build')));
 
-//
-app.get('/', jobController.syncData, (req, res) => {
-  res.status(201);
-});
-
 //Creating job in database
 app.post('/', jobController.createJob, (req, res) => {
   res.status(201).redirect('/');
@@ -30,7 +25,7 @@ app.delete('/:id', jobController.deleteStatus, (req, res) => {
   res.status(201).redirect('/');
 });
 
-app.get('*', (req, res) =>
+app.get('*', jobController.syncData, (req, res) =>
   res.sendFile(path.resolve(__dirname, '../build/index.html'))
 );
 
