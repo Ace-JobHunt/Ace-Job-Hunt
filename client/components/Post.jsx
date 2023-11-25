@@ -1,31 +1,43 @@
 import React from 'react';
-
+import { deleteNote } from '../reducers/jobReducer.js';
+import { useDispatch } from 'react-redux';
 
 const Post = (props) => {
-    const {
-     post: { company },
-     post: { jobTitle },
-     post: { dateCreated },
-     post: { lastUpdated },
-    } = props;
-  
-    return (
-      <div className='postBox'>
-        <label htmlFor='company'> Company: </label>
-        <span id='Company'>{company}</span>
-        <p>
-          <label htmlFor='jobTitle'>Job Title: </label>
-          <span id='jobTitle'>{jobTitle}</span>
-        </p>
-        <p>
-          <label htmlFor='dateCreated'>Date Created: </label>
-          <span id='dateCreated'>{dateCreated}</span>
-        </p>
-        <label htmlFor='lastUpdated'> Last Updated: </label>
-          <span id='lastUpdated'>{lastUpdated}</span>
-        </p>
-      </div>
-    );
-  };
-  
-  export default Post;
+  const dispatch = useDispatch();
+  function handleDelete(event) {
+    event.preventDefault();
+    dispatch(deleteNote(props.payload));
+  }
+
+  return (
+    <div className='postBox'>
+      <p>
+        <b>Company:</b>
+        {props.company}
+      </p>
+      <p>
+        <b>Job Title:</b>
+        {props.jobTitle}
+      </p>
+      <p>
+        <b>Date Created:</b>
+        {props.date}
+      </p>
+      <p>
+        <b>Salary:</b>
+        {props.salary}
+      </p>
+      <p>
+        <b>Status:</b>
+        {props.status}
+      </p>
+      <p>
+        <b>Job Link:</b>
+        <a href={props.jobLink}>Click on Link</a>
+
+      </p>
+    </div>
+  );
+};
+
+export default Post;

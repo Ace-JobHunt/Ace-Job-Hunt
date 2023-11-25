@@ -5,6 +5,8 @@ import App from './App.jsx';
 import store from './store';
 import { useDispatch } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from './style.css';
+
 
 const root = createRoot(document.getElementById('root'));
 root.render(
