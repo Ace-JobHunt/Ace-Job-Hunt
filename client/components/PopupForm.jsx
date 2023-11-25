@@ -27,6 +27,11 @@ const PopupForm = () => {
           <Modal.Title>Create New Job</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            {/* setCompany, etc? */}
+
+          }}>
           {/* form elements below  */}
           <label>
             {' '}
@@ -51,12 +56,21 @@ const PopupForm = () => {
           <label>
             {' '}
             Status:
-            <input
+            <select id="status" >
+              {/* is there a way to dynamically show these based on the status array? */}
+              <option value="interested">Interested</option>
+              <option value="applied">Applied</option>
+              <option value="interviewScheduled">Interview Scheduled</option>
+              <option value="followUp">Follow Up Needed</option>
+              <option value="noOffer">No Offer</option>
+              <option value="offer">Offer</option>
+            </select>
+            {/* <input
               id='status'
               placeholder='Applied'
               type='string'
               value={props.status}
-            />
+            /> */}
           </label>
           <label>
             {' '}
@@ -89,6 +103,7 @@ const PopupForm = () => {
         </Modal.Footer>
       </Modal>
     </>
+    </form>
   );
 };
 
