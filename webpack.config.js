@@ -1,51 +1,53 @@
 const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './client/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
-    publicPath: '/build/',
+  //index.js file location
+  entry: {
+    src: './client/index.js',
   },
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: './index.html',
-    }),
-  ],
+  //where to save final build files
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'build'),
+  },
   module: {
     rules: [
+      //use for js & jsx files
       {
         test: /\.jsx?/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react'],
         },
       },
+      //use for css files
       {
-        test: /\.(sc|sa|c)ss$/i,
-        exclude: /node_modules/,
-        use: [
-          // Creates `style` nodes from JS strings
-          'style-loader',
-          // Translates CSS into CommonJS
-          'css-loader',
-          // Compiles Sass to CSS
-          'sass-loader',
-        ],
+        test: /\.css/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
+  plugins: [
+    //use to load react components
+    new HtmlWebpackPlugin({
+      title: 'Development',
+      template: './index.html',
+    }),
+  ],
   devServer: {
+    //allow to run both front and backend
     static: {
-      directory: path.resolve(__dirname, 'public'),
+      publicPath: '/build',
+      directory: path.resolve(__dirname, 'build'),
     },
+    //send all request to backend
     proxy: {
       '/': 'http://localhost:3000',
     },
+    //use to load react components with react router
+    historyApiFallback: true,
   },
 };
