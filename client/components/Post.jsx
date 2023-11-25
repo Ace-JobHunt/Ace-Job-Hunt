@@ -34,6 +34,7 @@ const Post = (props) => {
       <p>
         <b>Job Link:</b>
         <a href={props.jobLink}>Click on Link</a>
+
       </p>
     </div>
   );
