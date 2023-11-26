@@ -8,7 +8,6 @@ import styles from './style.css';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  // wrap the App in the Provider Component and pass in the store
   <Provider store={store}>
     <App />
   </Provider>

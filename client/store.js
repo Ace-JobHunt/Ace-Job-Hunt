@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import noteSlice from '../client/reducers/jobReducer.js';
+import notesReducer from './reducers/noteReducer.js';
 
 const store = configureStore({
-  reducer: { notes: noteSlice },
-
+  reducer: { notes: notesReducer },
 });
 
 export default store;
