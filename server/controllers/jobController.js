@@ -4,9 +4,8 @@ const jobController = {
   //create job app.
   async createJob(req, res, next) {
     try {
-      console.log(req.body);
       const { company, title, salary, status, link } = req.body;
-      if (company) {
+      if (company.length && title.length && status.length) {
         const newJob = await Job.create({
           company,
           title,
@@ -17,7 +16,7 @@ const jobController = {
         return next();
       } else {
         return next({
-          log: `Error in the jobController.createJob`,
+          log: 'Error in the jobController.createJob',
           message: { err: 'Error in creating new job application' },
           status: 400,
         });
@@ -35,14 +34,21 @@ const jobController = {
     //update the status of the job.
     try {
       const jobId = req.params.id;
-      const { company, title, dateApplied, dateChanged, salary, status, link } =
-        req.body;
+      const { company, title, salary, status, link } = req.body;
 
-      const updatedJob = await Job.updateOne(
-        { id: jobId },
-        { company, title, dateApplied, dateChanged, salary, status, link }
-      );
-      return next();
+      if (company.length && title.length && status.length) {
+        const updatedJob = await Job.updateOne(
+          { id: jobId },
+          { company, title, salary, status, link }
+        );
+        return next();
+      } else {
+        return next({
+          log: 'Error in the jobController.updateStatus',
+          message: { err: 'Error occured in updating status' },
+          status: 400,
+        });
+      }
     } catch (error) {
       return next({
         log: `Error in the jobController.updateStatus: ${error}`,
@@ -54,7 +60,7 @@ const jobController = {
 
   async deleteStatus(req, res, next) {
     try {
-      const jobId = req.arams.id;
+      const jobId = req.params.id;
       if (jobId) {
         const deletedJob = await Job.findByIdAndDelete(jobId);
         return next();
@@ -78,18 +84,18 @@ const jobController = {
     try {
       const allInterested = await Job.find({ status: 'interested' });
       const allApplied = await Job.find({ status: 'applied' });
-      const allnterviewed = await Job.find({ status: 'interviewed' });
-      const allFollowedup = await Job.find({ status: 'followedup' });
-      const allAccepted = await Job.find({ status: 'accepted' });
-      const allRejected = await Job.find({ status: 'rejected' });
+      const allnterviewed = await Job.find({ status: 'interviewScheduled' });
+      const allFollowedup = await Job.find({ status: 'followUp' });
+      const allRejected = await Job.find({ status: 'noOffer' });
+      const allAccepted = await Job.find({ status: 'offer' });
 
       let syncObject = {
-        interested: allInterested,
-        applied: allApplied,
-        interviewed: allnterviewed,
-        followedup: allFollowedup,
-        accepted: allAccepted,
-        rejected: allRejected,
+        Interested: allInterested,
+        Applied: allApplied,
+        Interviewed: allnterviewed,
+        FollowedUp: allFollowedup,
+        Accepted: allAccepted,
+        Rejected: allRejected,
       };
 
       res.locals.syncData = syncObject;

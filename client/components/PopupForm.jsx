@@ -11,8 +11,8 @@ const PopupForm = () => {
 
   const [company, setCompany] = useState('');
   const [jobTitle, setJobTitle] = useState('');
-  const [status, setStatus] = useState('');
   const [salary, setSalary] = useState('');
+  const [status, setStatus] = useState('');
   const [link, setLink] = useState('');
 
   function handleClick() {
@@ -23,9 +23,6 @@ const PopupForm = () => {
       status: status,
       link: link,
     };
-
-    console.log(formObj);
-
     fetch('/', {
       method: 'POST',
       body: JSON.stringify(formObj),
@@ -43,7 +40,7 @@ const PopupForm = () => {
   return (
     <>
       {/* can replace below with our own button element  */}
-      <Button variant='primary' onClick={handleShow}>
+      <Button variant='primary' className='formButton' onClick={handleShow}>
         +
       </Button>
 
@@ -112,6 +109,7 @@ const PopupForm = () => {
                 }}
               >
                 {/* is there a way to dynamically show these based on the status array? */}
+                <option value='blank'>Select Status</option>
                 <option value='interested'>Interested</option>
                 <option value='applied'>Applied</option>
                 <option value='interviewScheduled'>Interview Scheduled</option>
@@ -119,12 +117,6 @@ const PopupForm = () => {
                 <option value='noOffer'>No Offer</option>
                 <option value='offer'>Offer</option>
               </select>
-              {/* <input
-              id='status'
-              placeholder='Applied'
-              type='string'
-              value={props.status}
-            /> */}
             </label>
             <label>
               {' '}
@@ -170,16 +162,3 @@ const PopupForm = () => {
 };
 
 export default PopupForm;
-
-// default values - status -applied date created todays date
-// company
-// job title
-// status
-// salary
-// job link
-// const {
-//     post: { company },
-//     post: { jobTitle },
-//     post: { dateCreated },
-//     post: { lastUpdated },
-//    } = props;
