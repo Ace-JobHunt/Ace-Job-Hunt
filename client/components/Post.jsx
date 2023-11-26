@@ -1,31 +1,30 @@
 import React from 'react';
 
+const Post = ({ company, title, salary, status, link }) => {
+  return (
+    <div className='postBox'>
+      <p>
+        <b>Company: </b>
+        {company}
+      </p>
+      <p>
+        <b>Job Title: </b>
+        {title}
+      </p>
+      <p>
+        <b>Salary: </b>
+        {salary}
+      </p>
+      <p>
+        <b>Status: </b>
+        {status}
+      </p>
+      <p>
+        <b>Job Link: </b>
+        <a href={link}>Click on Link</a>
+      </p>
+    </div>
+  );
+};
 
-const Post = (props) => {
-    const {
-     post: { company },
-     post: { jobTitle },
-     post: { dateCreated },
-     post: { lastUpdated },
-    } = props;
-  
-    return (
-      <div className='postBox'>
-        <label htmlFor='company'> Company: </label>
-        <span id='Company'>{company}</span>
-        <p>
-          <label htmlFor='jobTitle'>Job Title: </label>
-          <span id='jobTitle'>{jobTitle}</span>
-        </p>
-        <p>
-          <label htmlFor='dateCreated'>Date Created: </label>
-          <span id='dateCreated'>{dateCreated}</span>
-        </p>
-        <label htmlFor='lastUpdated'> Last Updated: </label>
-          <span id='lastUpdated'>{lastUpdated}</span>
-        </p>
-      </div>
-    );
-  };
-  
-  export default Post;
+export default Post;

@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import statusReducer from '../client/reducers/jobReducer';
+import notesReducer from './reducers/noteReducer.js';
 
-export const store = configureStore({
-  reducer: { status: statusReducer },
+const store = configureStore({
+  reducer: { notes: notesReducer },
 });
+
+export default store;

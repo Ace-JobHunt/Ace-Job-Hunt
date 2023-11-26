@@ -1,12 +1,21 @@
 import React from 'react';
-import StatusColumns from '../components/StatusColumns.jsx';
+import DisplayNotes from '../components/DisplayNotes.jsx';
 
 const JobContainer = () => {
-  return (
-    <div className='container'>
-      <StatusColumns className='display' />
-    </div>
-  );
+  const statusArray = [
+    'Interested',
+    'Applied',
+    'Interviewed',
+    'FollowedUp',
+    'Accepted',
+    'Rejected',
+  ];
+
+  let columnArray = [];
+  statusArray.forEach((ele) => {
+    columnArray.push(<DisplayNotes key={ele} status={ele} />);
+  });
+  return <div className='jobContainer'>{columnArray}</div>;
 };
 
 export default JobContainer;
