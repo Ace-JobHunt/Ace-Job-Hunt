@@ -35,6 +35,9 @@ const PopupForm = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    handleClose();
+    location.reload();
   }
 
   return (
@@ -56,6 +59,7 @@ const PopupForm = () => {
         </Modal.Header>
         <Modal.Body>
           <form
+            className='formInput'
             onSubmit={(e) => {
               e.preventDefault();
               {
@@ -112,10 +116,10 @@ const PopupForm = () => {
                 <option value='blank'>Select Status</option>
                 <option value='interested'>Interested</option>
                 <option value='applied'>Applied</option>
-                <option value='interviewScheduled'>Interview Scheduled</option>
-                <option value='followUp'>Follow Up Needed</option>
-                <option value='noOffer'>No Offer</option>
-                <option value='offer'>Offer</option>
+                <option value='interviewScheduled'>Interviewed</option>
+                <option value='followUp'>Followed Up</option>
+                <option value='offer'>Accepted</option>
+                <option value='noOffer'>Rejected</option>
               </select>
             </label>
             <label>

@@ -1,8 +1,18 @@
 import React from 'react';
 
 const Post = ({ company, title, salary, status, link }) => {
+  let colorArray = [
+    'lightblue',
+    'lightsalmon',
+    'lightgreen',
+    'lightpink',
+    'yellow',
+  ];
+
+  let randomColor = colorArray[Math.floor(Math.random() * colorArray.length)];
+
   return (
-    <div className='postBox'>
+    <div className='postBox' style={{ backgroundColor: `${randomColor}` }}>
       <p>
         <b>Company: </b>
         {company}
