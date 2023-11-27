@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../reducers/noteReducer.js';
 
-const Post = ({ company, title, salary, status, link }) => {
+const Post = ({ company, title, salary, status, link, key }) => {
+  const dispatch = useDispatch();
   let colorArray = [
     'lightblue',
     'lightsalmon',
@@ -8,11 +12,11 @@ const Post = ({ company, title, salary, status, link }) => {
     'lightpink',
     'yellow',
   ];
-
   let randomColor = colorArray[Math.floor(Math.random() * colorArray.length)];
 
   return (
     <div className='postBox' style={{ backgroundColor: `${randomColor}` }}>
+      <Button onClick={() => dispatch(deletePost(key))}>X</Button>
       <p>
         <b>Company: </b>
         {company}

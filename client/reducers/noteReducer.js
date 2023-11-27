@@ -8,12 +8,12 @@ const initialState = {
   Accepted: [],
   Rejected: [],
 };
-
 const noteSlice = createSlice({
   name: 'note',
   initialState,
   reducers: {
     syncData: (state, action) => {
+      //console.log(`action.payload`, action.payload);
       state.Interested = state.Interested.slice();
       state.Interested = action.payload.Interested;
 
@@ -32,9 +32,19 @@ const noteSlice = createSlice({
       state.Rejected = state.Rejected.slice();
       state.Rejected = action.payload.Rejected;
     },
+    deletePost: (state, action) => {
+      console.log(`delepost`, action.payload);
+      state.Interested.splice(
+        state.Interested.findIndex((note) => {
+          console.log(note);
+          note.id === action.payload;
+        }),
+        1
+      );
+    },
   },
 });
 
 export const { syncData } = noteSlice.actions;
-
+export const { deletePost } = noteSlice.actions;
 export default noteSlice.reducer;
