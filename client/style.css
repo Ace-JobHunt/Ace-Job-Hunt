@@ -3,24 +3,31 @@
   display: flex;
   border: 1px solid black;
   margin: 15px;
+  padding: 10px;
   justify-content: space-between;
 }
 
-#header {
-  padding-left: 700px;
-}
-
 .formButton {
+  height: 45px;
   width: 45px;
   border-radius: 30px;
   margin: 5px;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formInput input {
+  margin-left: 5px;
 }
 
 /* Job Container */
 .jobContainer {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  border: 1px solid black;
   margin: 15px;
 }
 
@@ -29,7 +36,7 @@
   display: flex;
   flex-direction: column;
   border: 1px solid black;
-  height: 92vh;
+  height: 91vh;
   padding: 5px;
 }
 
@@ -38,21 +45,38 @@
   width: 100%;
   text-align: center;
   padding: 10px;
+  font-weight: 600;
+  font-size: 20px;
 }
 
+/* Post Container */
 .postContainer {
+  padding: 15px 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
 }
 
-/* Post Container */
 .postBox {
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid grey;
   padding: 5px;
   margin: 5px;
-  width: 125px;
-  background-color: yellow;
+  width: 135px;
+}
+
+.postBox:hover {
+  box-shadow: 0px 0px 20px grey;
+}
+
+.postButton {
+  border: none;
+  background: rgba(0, 0, 0, 0);
+  font-size: 10px;
+  font-weight: 600;
+  align-self: flex-end;
+  padding: 0px;
 }
 
 .postBox p {

@@ -4,9 +4,15 @@ const jobController = {
   //create job app.
   async createJob(req, res, next) {
     try {
-      const { company, title, salary, status, link } = req.body;
-      if (company.length && title.length && status.length) {
+      const { dateApplied, company, title, salary, status, link } = req.body;
+      if (
+        dateApplied.length &&
+        company.length &&
+        title.length &&
+        status.length
+      ) {
         const newJob = await Job.create({
+          dateApplied,
           company,
           title,
           salary,
@@ -34,13 +40,10 @@ const jobController = {
     //update the status of the job.
     try {
       const jobId = req.params.id;
-      const { company, title, salary, status, link } = req.body;
+      const { status } = req.body;
 
-      if (company.length && title.length && status.length) {
-        const updatedJob = await Job.updateOne(
-          { id: jobId },
-          { company, title, salary, status, link }
-        );
+      if (status.length) {
+        const updatedJob = await Job.updateOne({ _id: jobId }, { status });
         return next();
       } else {
         return next({
@@ -82,12 +85,12 @@ const jobController = {
 
   async syncData(req, res, next) {
     try {
-      const allInterested = await Job.find({ status: 'interested' });
-      const allApplied = await Job.find({ status: 'applied' });
-      const allnterviewed = await Job.find({ status: 'interviewScheduled' });
-      const allFollowedup = await Job.find({ status: 'followUp' });
-      const allRejected = await Job.find({ status: 'noOffer' });
-      const allAccepted = await Job.find({ status: 'offer' });
+      const allInterested = await Job.find({ status: 'Interested' });
+      const allApplied = await Job.find({ status: 'Applied' });
+      const allnterviewed = await Job.find({ status: 'Interviewed' });
+      const allFollowedup = await Job.find({ status: 'FollowedUp' });
+      const allRejected = await Job.find({ status: 'Rejected' });
+      const allAccepted = await Job.find({ status: 'Accepted' });
 
       let syncObject = {
         Interested: allInterested,

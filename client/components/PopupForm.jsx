@@ -9,6 +9,7 @@ const PopupForm = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [dateApplied, setdateApplied] = useState('');
   const [company, setCompany] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [salary, setSalary] = useState('');
@@ -17,12 +18,14 @@ const PopupForm = () => {
 
   function handleClick() {
     let formObj = {
+      dateApplied: dateApplied,
       company: company,
       title: jobTitle,
       salary: salary,
       status: status,
       link: link,
     };
+
     fetch('/', {
       method: 'POST',
       body: JSON.stringify(formObj),
@@ -35,6 +38,9 @@ const PopupForm = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    handleClose();
+    location.reload();
   }
 
   return (
@@ -56,6 +62,7 @@ const PopupForm = () => {
         </Modal.Header>
         <Modal.Body>
           <form
+            className='formInput'
             onSubmit={(e) => {
               e.preventDefault();
               {
@@ -72,6 +79,18 @@ const PopupForm = () => {
             }}
           >
             {/* form elements below  */}
+            <label>
+              {' '}
+              Date Applied:
+              <input
+                id='dateApplied'
+                type='date'
+                value={dateApplied}
+                onChange={(e) => {
+                  setdateApplied(e.target.value);
+                }}
+              />
+            </label>
             <label>
               {' '}
               Company:
@@ -110,12 +129,12 @@ const PopupForm = () => {
               >
                 {/* is there a way to dynamically show these based on the status array? */}
                 <option value='blank'>Select Status</option>
-                <option value='interested'>Interested</option>
-                <option value='applied'>Applied</option>
-                <option value='interviewScheduled'>Interview Scheduled</option>
-                <option value='followUp'>Follow Up Needed</option>
-                <option value='noOffer'>No Offer</option>
-                <option value='offer'>Offer</option>
+                <option value='Interested'>Interested</option>
+                <option value='Applied'>Applied</option>
+                <option value='Interviewed'>Interviewed</option>
+                <option value='FollowedUp'>Followed Up</option>
+                <option value='Accepted'>Accepted</option>
+                <option value='Rejected'>Rejected</option>
               </select>
             </label>
             <label>
