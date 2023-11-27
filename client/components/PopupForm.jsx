@@ -129,12 +129,12 @@ const PopupForm = () => {
               >
                 {/* is there a way to dynamically show these based on the status array? */}
                 <option value='blank'>Select Status</option>
-                <option value='interested'>Interested</option>
-                <option value='applied'>Applied</option>
-                <option value='interviewScheduled'>Interviewed</option>
-                <option value='followUp'>Followed Up</option>
-                <option value='offer'>Accepted</option>
-                <option value='noOffer'>Rejected</option>
+                <option value='Interested'>Interested</option>
+                <option value='Applied'>Applied</option>
+                <option value='Interviewed'>Interviewed</option>
+                <option value='FollowedUp'>Followed Up</option>
+                <option value='Accepted'>Accepted</option>
+                <option value='Rejected'>Rejected</option>
               </select>
             </label>
             <label>

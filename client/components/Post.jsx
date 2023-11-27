@@ -1,13 +1,22 @@
 import React from 'react';
+import { useDrag } from 'react-dnd';
 
 const Post = ({ id, dateApplied, company, title, salary, status, link }) => {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'post',
+    item: { id: id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
   let colorArray = {
-    interested: 'yellow',
-    applied: 'lightpink',
-    interviewScheduled: 'lightblue',
-    followUp: 'lavender',
-    offer: 'lightgreen',
-    noOffer: 'lightsalmon',
+    Interested: 'yellow',
+    Applied: 'lightpink',
+    Interviewed: 'lightblue',
+    FollowedUp: 'lavender',
+    Accepted: 'lightgreen',
+    Rejected: 'lightsalmon',
   };
 
   function handleClick() {
@@ -26,7 +35,11 @@ const Post = ({ id, dateApplied, company, title, salary, status, link }) => {
   }
 
   return (
-    <div className='postBox' style={{ backgroundColor: colorArray[status] }}>
+    <div
+      className='postBox'
+      style={{ backgroundColor: colorArray[status] }}
+      ref={drag}
+    >
       <button className='postButton' onClick={handleClick}>
         X
       </button>
