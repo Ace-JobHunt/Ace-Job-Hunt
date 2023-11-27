@@ -5,11 +5,14 @@ import Post from './Post.jsx';
 const DisplayNotes = ({ status }) => {
   const data = useSelector((state) => state.notes[status]);
 
+  console.log(data);
+
   const postArray = [];
   data.forEach((ele) => {
     postArray.push(
       <Post
-        key={ele.id}
+        key={ele._id}
+        id={ele._id}
         dateApplied={ele.dateApplied}
         company={ele.company}
         title={ele.title}

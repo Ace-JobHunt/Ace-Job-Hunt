@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Post = ({ dateApplied, company, title, salary, status, link }) => {
+const Post = ({ id, dateApplied, company, title, salary, status, link }) => {
   let colorArray = {
     interested: 'yellow',
     applied: 'lightpink',
@@ -10,8 +10,26 @@ const Post = ({ dateApplied, company, title, salary, status, link }) => {
     noOffer: 'lightsalmon',
   };
 
+  function handleClick() {
+    fetch(`/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    location.reload();
+  }
+
   return (
     <div className='postBox' style={{ backgroundColor: colorArray[status] }}>
+      <button className='postButton' onClick={handleClick}>
+        X
+      </button>
       <p>
         <b>Date Applied: </b>
         {dateApplied.substring(0, 10)}
