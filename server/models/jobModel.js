@@ -16,9 +16,7 @@ const Schema = mongoose.Schema;
 const jobSchema = new Schema({
   company: { type: String, required: true },
   title: { type: String, required: true },
-  dateApplied: { type: Date, required: true },
-  dateChanged: Date,
-  salary: Number,
+  salary: String,
   status: { type: String, required: true },
   link: String,
 });

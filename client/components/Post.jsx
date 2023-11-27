@@ -1,40 +1,37 @@
 import React from 'react';
-import { deleteNote } from '../reducers/jobReducer.js';
-import { useDispatch } from 'react-redux';
 
-const Post = (props) => {
-  const dispatch = useDispatch();
-  function handleDelete(event) {
-    event.preventDefault();
-    dispatch(deleteNote(props.payload));
-  }
+const Post = ({ company, title, salary, status, link }) => {
+  let colorArray = [
+    'lightblue',
+    'lightsalmon',
+    'lightgreen',
+    'lightpink',
+    'yellow',
+  ];
+
+  let randomColor = colorArray[Math.floor(Math.random() * colorArray.length)];
 
   return (
-    <div className='postBox'>
+    <div className='postBox' style={{ backgroundColor: `${randomColor}` }}>
       <p>
-        <b>Company:</b>
-        {props.company}
+        <b>Company: </b>
+        {company}
       </p>
       <p>
-        <b>Job Title:</b>
-        {props.jobTitle}
+        <b>Job Title: </b>
+        {title}
       </p>
       <p>
-        <b>Date Created:</b>
-        {props.date}
+        <b>Salary: </b>
+        {salary}
       </p>
       <p>
-        <b>Salary:</b>
-        {props.salary}
+        <b>Status: </b>
+        {status}
       </p>
       <p>
-        <b>Status:</b>
-        {props.status}
-      </p>
-      <p>
-        <b>Job Link:</b>
-        <a href={props.jobLink}>Click on Link</a>
-
+        <b>Job Link: </b>
+        <a href={link}>Click on Link</a>
       </p>
     </div>
   );

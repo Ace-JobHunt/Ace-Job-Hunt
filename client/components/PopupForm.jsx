@@ -9,16 +9,41 @@ const PopupForm = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [company, setCompany] = useState(null);
-  const [jobTitle, setJobTitle] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [salary, setSalary] = useState(null);
-  const [link, setLink] = useState(null);
+  const [company, setCompany] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
+  const [salary, setSalary] = useState('');
+  const [status, setStatus] = useState('');
+  const [link, setLink] = useState('');
+
+  function handleClick() {
+    let formObj = {
+      company: company,
+      title: jobTitle,
+      salary: salary,
+      status: status,
+      link: link,
+    };
+    fetch('/', {
+      method: 'POST',
+      body: JSON.stringify(formObj),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    handleClose();
+    location.reload();
+  }
 
   return (
     <>
       {/* can replace below with our own button element  */}
-      <Button variant='primary' onClick={handleShow}>
+      <Button variant='primary' className='formButton' onClick={handleShow}>
         +
       </Button>
 
@@ -34,6 +59,7 @@ const PopupForm = () => {
         </Modal.Header>
         <Modal.Body>
           <form
+            className='formInput'
             onSubmit={(e) => {
               e.preventDefault();
               {
@@ -57,7 +83,7 @@ const PopupForm = () => {
                 id='company'
                 placeholder='Codesmith'
                 type='string'
-                value={props.company}
+                value={company}
                 onChange={(e) => {
                   setCompany(e.target.value);
                 }}
@@ -70,7 +96,7 @@ const PopupForm = () => {
                 id='jobTitle'
                 placeholder='Software Engineer'
                 type='string'
-                value={props.jobTitle}
+                value={jobTitle}
                 onChange={(e) => {
                   setJobTitle(e.target.value);
                 }}
@@ -81,24 +107,20 @@ const PopupForm = () => {
               Status:
               <select
                 id='status'
+                value={status}
                 onChange={(e) => {
                   setStatus(e.target.value);
                 }}
               >
                 {/* is there a way to dynamically show these based on the status array? */}
+                <option value='blank'>Select Status</option>
                 <option value='interested'>Interested</option>
                 <option value='applied'>Applied</option>
-                <option value='interviewScheduled'>Interview Scheduled</option>
-                <option value='followUp'>Follow Up Needed</option>
-                <option value='noOffer'>No Offer</option>
-                <option value='offer'>Offer</option>
+                <option value='interviewScheduled'>Interviewed</option>
+                <option value='followUp'>Followed Up</option>
+                <option value='offer'>Accepted</option>
+                <option value='noOffer'>Rejected</option>
               </select>
-              {/* <input
-              id='status'
-              placeholder='Applied'
-              type='string'
-              value={props.status}
-            /> */}
             </label>
             <label>
               {' '}
@@ -107,7 +129,7 @@ const PopupForm = () => {
                 id='salary'
                 placeholder='100,000'
                 type='number'
-                value={props.salary}
+                value={salary}
                 onChange={(e) => {
                   setSalary(e.target.value);
                 }}
@@ -120,7 +142,7 @@ const PopupForm = () => {
                 id='link'
                 placeholder='www.codesmith.io'
                 type='string'
-                value={props.link}
+                value={link}
                 onChange={(e) => {
                   setLink(e.target.value);
                 }}
@@ -134,7 +156,9 @@ const PopupForm = () => {
             Don't Save
           </Button>
           {/* when they click track button - send to database  */}
-          <Button variant='primary'>Let's Track It!</Button>
+          <Button variant='primary' onClick={handleClick}>
+            Let's Track It!
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
@@ -142,16 +166,3 @@ const PopupForm = () => {
 };
 
 export default PopupForm;
-
-// default values - status -applied date created todays date
-// company
-// job title
-// status
-// salary
-// job link
-// const {
-//     post: { company },
-//     post: { jobTitle },
-//     post: { dateCreated },
-//     post: { lastUpdated },
-//    } = props;

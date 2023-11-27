@@ -1,28 +1,27 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
+import Post from './Post.jsx';
 
 const DisplayNotes = ({ status }) => {
-  const data = useSelector((state) => {
-    return state.notes.status;
-  });
-  console.log('data', data);
+  const data = useSelector((state) => state.notes[status]);
+
   const postArray = [];
   data.forEach((ele) => {
     postArray.push(
       <Post
         key={ele.id}
         company={ele.company}
-        jobTitle={ele.jobTitle}
-        date={ele.date}
+        title={ele.title}
         salary={ele.salary}
         status={ele.status}
-        jobLink={ele.jobLink}
+        link={ele.link}
       />
     );
   });
   return (
-    <div>
+    <div className='statusColumn'>
       <label id='status'>{status}</label>
-      {postArray}
+      <div className='postContainer'>{postArray}</div>
     </div>
   );
 };
