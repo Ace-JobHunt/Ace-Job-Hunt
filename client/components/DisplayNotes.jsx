@@ -10,6 +10,7 @@ const DisplayNotes = ({ status }) => {
     postArray.push(
       <Post
         key={ele.id}
+        dateApplied={ele.dateApplied}
         company={ele.company}
         title={ele.title}
         salary={ele.salary}

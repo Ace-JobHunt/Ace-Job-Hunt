@@ -9,6 +9,7 @@ const PopupForm = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [dateApplied, setdateApplied] = useState('');
   const [company, setCompany] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [salary, setSalary] = useState('');
@@ -17,12 +18,14 @@ const PopupForm = () => {
 
   function handleClick() {
     let formObj = {
+      dateApplied: dateApplied,
       company: company,
       title: jobTitle,
       salary: salary,
       status: status,
       link: link,
     };
+
     fetch('/', {
       method: 'POST',
       body: JSON.stringify(formObj),
@@ -76,6 +79,18 @@ const PopupForm = () => {
             }}
           >
             {/* form elements below  */}
+            <label>
+              {' '}
+              Date Applied:
+              <input
+                id='dateApplied'
+                type='date'
+                value={dateApplied}
+                onChange={(e) => {
+                  setdateApplied(e.target.value);
+                }}
+              />
+            </label>
             <label>
               {' '}
               Company:

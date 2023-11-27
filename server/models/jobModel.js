@@ -14,6 +14,7 @@ mongoose
 const Schema = mongoose.Schema;
 
 const jobSchema = new Schema({
+  dateApplied: { type: Date, required: true },
   company: { type: String, required: true },
   title: { type: String, required: true },
   salary: String,
