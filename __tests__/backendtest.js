@@ -3,8 +3,6 @@ const server = 'http://localhost:3000';
 const { Job } = require('../server/models/jobModel');
 const jobController = require('../server/controllers/jobController');
 
-
-
 describe('Route integration', () => {
   const testObj = {
     dateApplied: new Date(),
@@ -55,6 +53,7 @@ describe('Route integration', () => {
     });
   
   describe('/:id', () => {
+    
     describe('PATCH', () => {
         it('post in the database is updated with new status', async () => {
           const response = await request(server)
@@ -63,41 +62,30 @@ describe('Route integration', () => {
           
           const app = await Job.findOne({company: 'TestCompany'});
           const id = app._id.toString();
-
           const patchResponse = await request(server)
             .patch(`/${id}`)
-            .send(patchTestObj);
+            .send({status: 'Applied'});
 
           const updatedApp = await Job.findOne({ _id: id });
-          expect(updatedApp.toObject().title).toEqual(patchTestObj.title);
-
-          // NOT DONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-          
-          // expect(app).toBe(123);
-          // expect(app.toObject().title).toEqual(patchTestObj.title);
-
+          expect(updatedApp.toObject().status).toEqual('Applied');
           await Job.deleteMany({ company: 'TestCompany' });
         });
       });
     });
 
-
-    xdescribe('DELETE', () => {
-      it('responds with 200 status and text/html content type', () => {
-        return request(server)
-          .get('/')
-          .expect('Content-Type', /text\/html/)
-          .expect(200);
-      });
+    describe('DELETE', () => {
       it('deletes post', async () => {
-        const app = await Job.findOne({company: 'TestCompany'});
-          const id = app._id.toString();
         const response = await request(server)
+            .post('/')
+            .send(testObj);
+          
+        const app = await Job.findOne({company: 'TestCompany'});
+        const id = app._id.toString();
+        const deleteResponse = await request(server)
           .delete(`/${id}`)
-        expect(app).toBe(123);
-          // .end((err, res) => {
-          //   // expect(res.body).toBe(testObj);
-          // });
+
+        const deletedApp = await Job.findOne({ _id: id });
+        expect(deletedApp).toBe(null);
       });
     });
 });
